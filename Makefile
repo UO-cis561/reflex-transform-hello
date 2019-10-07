@@ -9,4 +9,4 @@ all:
 
 image:
 	(cd src; make clean;)
-	docker build --tag=proj0 .
+	docker build --tag=hello .

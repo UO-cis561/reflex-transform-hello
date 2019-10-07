@@ -1,13 +1,17 @@
-# reflex-transform-example
-An example of using a scanner generator to create a simple file transformation
+# reflex-transform-hello
+A simpler example of writing a simple file-scanning
+application with the REflex scanner generator. 
 
-This example is a transform that might be applied 
-to student Python projects before comparing them -- 
-since it is easy to change comments or variable names, 
-I'll strip out the comments and change all variables 
-to "v". Tools like MOSS, used for plagiarism detection, 
-use a 'normalization' filter like this for each 
-programming language they process. 
+REflex reads hello.lxx and creates lex.yy.cpp. 
+You compile lex.yy.cpp to get the file-scanning 
+program. 
+
+It should be possible to create this application 
+both on your working environment (laptop, etc) 
+and in Docker.  Your working environment is more 
+convenient, so develop and debug there first before
+checking (and possibly debugging) in the Docker environment. 
+
 
 Pre-requisites:  
 RE/flex must be installed in the standard places, 
@@ -27,26 +31,16 @@ and produce a binary in the 'bin' directory.
 ## To run
 (after building)
 
-`bin/py_strip < data/assembler_pass1_save.py` 
+`bin/hello < data/example.txt`
 
-The last several lines of the output should look like this: 
-```python
-def i():
-    """@"""
-    i = i()
-    i = [i.i() for i in i.i.i()]
-    i, i = i(i)
-    i.i("@".format(i))
-    if i == 0:
-        i(i, i)
-    if i == 0:
-        for i in i:
-            print(i, i=i.i)
-    i.i.i()
-    i.i("@")
-if _ == "@":
-    i()
-
+The output should be: 
+```
+Well, goodby mars! Nice to meet you.
+I have been looking for a mars much like you,
+although there are a few things I might like
+to alter.
+1 occurrences of hello
+2 occurrences of world
 ```
 
 

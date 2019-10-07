@@ -1,0 +1,45 @@
+%top{
+/* A sort of hello world using REflex */
+ #include <iostream>
+ /* We'll count occurrences of 'hello' and 'world' */
+ static int hello_count = 0;
+ static int world_count = 0;
+%}
+
+  /* Options control things like the name of the C++ class that
+   * REflex will generate, how it will name variables, the name of the output
+   * file, and what it does when it encounters end-of-file.
+   */
+%option noyywrap
+%option namespace=yy lexer=Lexer lex=yylex
+
+ /* No lexical states in this one ... see reflex_transform_example
+  * for use of lexical states.
+  */
+%%
+  /* The %% above starts the pattern/action part of the spec. */
+
+  /* Crush white-space sequences to a single blank. */
+[ ]+   { std::cout << " "; }
+
+hello  { ++hello_count; std::cout <<"goodby"; }
+world  { ++world_count; std::cout <<"mars"; }
+
+ /* With maximum munch, we can override the hello world matching for
+  * alongwordcontaininghello worldishness
+  */
+[^ \.\?\,\!]+  echo();
+. echo();
+
+<<EOF>>  { return 0; }
+
+%%
+
+/* For simple filters, the main program can go here. */
+
+int main(int argc, char **argv) {
+     yy::Lexer().yylex();
+     std::cout << hello_count << " occurrences of hello\n";
+     std::cout << world_count << " occurrences of world\n";
+     exit(0);
+}
